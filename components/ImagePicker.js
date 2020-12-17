@@ -7,7 +7,6 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
 import Colors from "../../rn-shopping-app/constants/Colors";
-import { ConsoleWriter } from "istanbul-lib-report";
 
 const ImgPicker = props => {
   const [pickedImage, setPickedImage] = useState();
