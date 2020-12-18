@@ -16,9 +16,10 @@ const PlacesListScreen = props => {
       data={places}
       keyExtractor={item => item.id}
       //renderItem - props - https://reactnative.dev/docs/flatlist#props
+      //ItemData.item - refers to item (Object): The item from data being rendered.
       renderItem={itemData => (
         <PlaceItem
-          image={null}
+          image={itemData.item.imageUri}
           title={itemData.item.title}
           address={null}
           onSelect={() => {
