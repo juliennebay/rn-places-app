@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 //reminder: need to install -> expo install expo-permissions
 import * as Permissions from "expo-permissions";
 
-import Colors from "../../rn-shopping-app/constants/Colors";
+import Colors from "../constants/Colors";
 
 const ImgPicker = props => {
   const [pickedImage, setPickedImage] = useState();
