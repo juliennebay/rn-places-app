@@ -1,7 +1,7 @@
 //expo-location allows reading geolocation information from the device.
 //https://docs.expo.io/versions/v40.0.0/sdk/location/
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -19,6 +19,19 @@ import MapPreview from "./MapPreview";
 const LocationPicker = props => {
   const [pickedLocation, setPickedLocation] = useState();
   const [isFetching, setIsFetching] = useState(false);
+
+  //the param (below) was set in MapScreen.js ("pickedLocation" was set as the key)
+  const mapPickedLocation = props.navigation.getParam("pickedLocation");
+
+  //use deconstructuring syntax here, so that on line 34, I can only specify this (instead of all the props)
+  const { onLocationPicked } = props;
+
+  useEffect(() => {
+    if (mapPickedLocation) {
+      setPickedLocation(mapPickedLocation);
+      onLocationPicked(mapPickedLocation);
+    }
+  }, [mapPickedLocation, onLocationPicked]);
 
   const verifyPermissions = async () => {
     //returns a promise
@@ -49,6 +62,11 @@ const LocationPicker = props => {
       });
       //console.log(location);
       setPickedLocation({
+        //const location returns an object
+        lat: location.coords.latitude,
+        lng: location.coords.longitude
+      });
+      props.onLocationPicked({
         //const location returns an object
         lat: location.coords.latitude,
         lng: location.coords.longitude
