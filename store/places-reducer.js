@@ -13,8 +13,15 @@ export default (state = initialState, action) => {
       return {
         //action.places because in places-actions.js, that's the key that was set (line 50)
         places: action.places.map(
-          place => new Place(place.id.toString(), place.title, place.imageUri)
-          //no need for lat/lng for now
+          place =>
+            new Place(
+              place.id.toString(),
+              place.title,
+              place.imageUri,
+              place.address,
+              place.lat,
+              place.lng
+            )
         )
       };
 
@@ -23,7 +30,10 @@ export default (state = initialState, action) => {
       const newPlace = new Place(
         action.placeData.id.toString(),
         action.placeData.title,
-        action.placeData.image
+        action.placeData.image,
+        action.placeData.address,
+        action.placeData.coords.lat,
+        action.placeData.coords.lng
       );
       return {
         places: state.places.concat(newPlace)
