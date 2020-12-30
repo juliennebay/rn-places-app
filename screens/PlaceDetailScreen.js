@@ -7,18 +7,18 @@ import Colors from "../constants/Colors";
 
 const PlaceDetailScreen = props => {
   //The key "PlaceId" was passed in PlaceListScreen (line 32)
-  const placeId = props.navigation.getParam("PlaceId");
+  const placeId = props.navigation.getParam("placeId");
 
-  const selectedPlace = useSelector(state =>
-    state.places.places.find(place => place.id === placeId)
-  );
+  const selectedPlace = useSelector(state => {
+    return state.places.places.find(place => place.id === placeId);
+  });
 
   const selectedLocation = { lat: selectedPlace.lat, lng: selectedPlace.lng };
 
   const showMapHandler = () => {
     props.navigation.navigate("Map", {
       readonly: true,
-      initialLocation: { selectedLocation }
+      initialLocation: selectedLocation
     });
   };
 
@@ -30,7 +30,7 @@ const PlaceDetailScreen = props => {
           <Text style={styles.address}>{selectedPlace.address}</Text>
         </View>
         <MapPreview
-          style={mapPreview}
+          style={styles.mapPreview}
           location={selectedLocation}
           onPress={showMapHandler}
         />

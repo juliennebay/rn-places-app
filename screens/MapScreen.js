@@ -17,7 +17,7 @@ const MapScreen = props => {
   const readonly = props.navigation.getParam("readonly");
 
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
-
+  console.log(initialLocation, "hello");
   const mapRegion = {
     latitude: initialLocation ? initialLocation.lat : 45.5,
     longitude: initialLocation ? initialLocation.lng : -73.56,
@@ -82,9 +82,11 @@ const MapScreen = props => {
 };
 
 MapScreen.navigationOptions = navData => {
+  //debugger;
+  console.log(navData);
   const saveFn = navData.navigation.getParam("saveLocation");
   //readonly - see notes on line 15
-  const readonly = props.navigation.getParam("readonly");
+  const readonly = navData.navigation.getParam("readonly");
   if (readonly) {
     //if readonly is set, then we won't show the "save" button
     return {};
